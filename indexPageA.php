@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
        
     </head>
-    <body>
+    <body style="background-color:red;">
     <form action="3Traitement.php" method="POST">
      
         <label for="id">ID--11</label><input type="number" name="id" id="id"><br>
