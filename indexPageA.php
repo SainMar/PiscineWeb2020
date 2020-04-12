@@ -15,7 +15,7 @@
     <body>
     <form action="3Traitement.php" method="POST">
      
-        <label for="id">ID</label><input type="number" name="id" id="id"><br>
+        <label for="id">ID--11</label><input type="number" name="id" id="id"><br>
         <label for="prenom">Prenom</label><input type="text" name="prenom" id="prenom"><br>
         <label for="nom">Nom</label><input type="text" name="nom" id="nom"><br>
         <label for="date_emb">DateEmbauche</label><input type="date" name="date_emb" id="date_emb"><br>
