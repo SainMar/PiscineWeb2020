@@ -1,0 +1,44 @@
+body
+{
+    
+}
+div
+{
+    /*border: 0.5px solid black;*/
+}
+#top-content
+{
+    background-color: #FA8B07;
+    
+}
+#top-top-content
+{
+    height:200px;
+}
+#logo
+{
+    color: white;
+    text-align: center;
+}
+p
+{
+    font-size: 80%;
+}
+#mid-top-content
+{
+    height: 560px;
+}
+.jumbotron
+{
+    margin-top: 200px;
+}
+#bot-top-content
+{
+    height: 70px;
+    
+}
+#row-bot-top-content
+{
+    margin-left: 33.5%;
+    margin-right: auto;
+}
