@@ -10,6 +10,7 @@
         //compteur pour ecrire requete
         $cpt = 0;
         $id = 0;
+        $presence=0;
 
         $dbh=connect_ddb($database);
 
@@ -24,7 +25,7 @@
         $achat_imme = isset($_POST["achatimme"])? $_POST["achatimme"]:"";
         $bar_rech = isset($_POST["bar_rech"])? $_POST["bar_rech"]:"";
 
-        echo 'bar_rech ='.$bar_rech.'  -1 ';
+       
         
 
         ///variable des catégories
@@ -110,8 +111,16 @@
 
             ///bout de requete pour les catgories
             if(!empty($cat_array))
-            {
-                if($id==1)
+            {   
+
+                foreach($cat_array as $cat_key => $cat_value)
+                {
+                    if($cat_value=="true")
+                    {
+                        $presence=1;
+                    }
+                }
+                if(($id==1)&&($presence==1))
                 {
                     $sql.=" AND (";
                 }
@@ -140,7 +149,7 @@
                         }
                     }
                 }
-                if(($id==2)||($id==1))
+                if(($id==2)||(($id==1)&&($presence==1)))
                 {
                     $sql.=")";
                 }
@@ -149,7 +158,7 @@
             
         }
 
-        echo $sql;
+        
         
         //$result = $dbh->query($sql);
         $result=$dbh->prepare($sql);
@@ -163,12 +172,12 @@
         if ($ok== 0) 
         {
             //le livre recherché n'existe pas
-            echo "items cannot be found";
+            echo "<h1>items cannot be found</h1>";
 
         } 
         else 
         {
-            echo "<br>Here what you have asked:";
+            
             //on trouve le livre recherché
            
             

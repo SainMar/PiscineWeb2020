@@ -1,32 +1,46 @@
+function refresh_mr(){
+          var hr= new XMLHttpRequest();
+          var url="moteurRech.php";
+          var cmpt=0;
+          var vars="";
+          $.each(param, function(key,value){
+                if(cmpt==0)
+                {
+                  vars+=key+"="+value;
+                  cmpt=1;
+                }
+                else
+                {
+                  vars+="&"+key+"="+value;
+                }
+          });
+
+          hr.open("POST", url, true);
+          hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+          hr.onreadystatechange = function(){
+            if(hr.readyState==4 && hr.status==200){
+              var return_data=hr.responseText;
+              document.getElementById('items').innerHTML = return_data;
+            }
+          }
+          hr.send(vars);
+          document.getElementById('items').innerHTML="preparing your selection...";
+}
 $(document).ready(function(){
 
-        var hr= new XMLHttpRequest();
-        var url="moteurRech.php";
-        var cmpt=0;
-        var vars="";
-        $.each(param, function(key,value){
-              if(cmpt==0)
-              {
-                vars+=key+"="+value;
-                cmpt=1;
-              }
-              else
-              {
-                vars+="&"+key+"="+value;
-              }
-        });
-
-        hr.open("POST", url, true);
-        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        hr.onreadystatechange = function(){
-          if(hr.readyState==4 && hr.status==200){
-            var return_data=hr.responseText;
-            document.getElementById('items').innerHTML = return_data;
-          }
-        }
-        hr.send(vars);
-        document.getElementById('items').innerHTML="preparing your selection...";
-
+    $cas1=$('#inscri_item_enchere').is(':checked');//checkbox enchere
+    $cas2=$('#inscri_item_meilloffre').is(':checked');//checkbox meilloffre
+    $cas3=$('#inscri_item_achatimme').is(':checked');//checkbox achatimme
+    if(($cas1==true)&&($cas3==true))
+    {
+      $('#inscri_item_meilloffre').attr('disabled',true);
+    }
+    if(($cas2==true)&&($cas3==true))
+    {
+      $('#inscri_item_enchere').attr('disabled',true);
+    }
+        
+    refresh_mr();
     
     
     $("#bar_rech").keyup(function(){
@@ -34,33 +48,9 @@ $(document).ready(function(){
         var name = $("#bar_rech").val();
         param["bar_rech"]=name;
         
+        refresh_mr();
 
-        var hr= new XMLHttpRequest();
-        var url="moteurRech.php";
-        var cmpt=0;
-        var vars="";
-        $.each(param, function(key,value){
-              if(cmpt==0)
-              {
-                vars+=key+"="+value;
-                cmpt=1;
-              }
-              else
-              {
-                vars+="&"+key+"="+value;
-              }
-        });
-
-        hr.open("POST", url, true);
-        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        hr.onreadystatechange = function(){
-          if(hr.readyState==4 && hr.status==200){
-            var return_data=hr.responseText;
-            document.getElementById('items').innerHTML = return_data;
-          }
-        }
-        hr.send(vars);
-        document.getElementById('items').innerHTML="preparing your selection...";
+        
     });
      
      
@@ -71,13 +61,13 @@ $(document).ready(function(){
         
         if(param[$(this).attr('id')]==false)
         {
-          alert("devient true");
+          
           param[$(this).attr('id')]=true;
           $(this).addClass('param_selected');
         }
         else
         {
-          alert("devient false");
+          
           param[$(this).attr('id')]=false;
           $(this).removeClass('param_selected');
         }
@@ -104,33 +94,7 @@ $(document).ready(function(){
         }
         
         
-        
-        var hr= new XMLHttpRequest();
-        var url="moteurRech.php";
-        var cmpt=0;
-        var vars="";
-        $.each(param, function(key,value){
-              if(cmpt==0)
-              {
-                vars+=key+"="+value;
-                cmpt=1;
-              }
-              else
-              {
-                vars+="&"+key+"="+value;
-              }
-        });
-
-        hr.open("POST", url, true);
-        hr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        hr.onreadystatechange = function(){
-          if(hr.readyState==4 && hr.status==200){
-            var return_data=hr.responseText;
-            document.getElementById('items').innerHTML = return_data;
-          }
-        }
-        hr.send(vars);
-        document.getElementById('items').innerHTML="preparing your selection...";
+       refresh_mr();
         
     });
 
@@ -140,12 +104,13 @@ $(document).ready(function(){
       tab["nom"]=$("#inscri_item_nom").val();
       tab["prix"]=$("#inscri_item_prix").val();
       tab["qualite"]=$("#inscri_item_qualite").val();
-      tab["default"]=$("#inscri_item_qualite").val();
+      tab["default"]=$("#inscri_item_default").val();
       tab["id_cat"]=1;
       tab["enchere"]=$('#inscri_item_enchere').is(':checked');
-      tab["meilloffre"]=$("#inscri_item_enchere").is(':checked');
-      tab["achatimme"]=$("#inscri_item_enchere").is(':checked');
+      tab["meilloffre"]=$("#inscri_item_meilloffre").is(':checked');
+      tab["achatimme"]=$("#inscri_item_achatimme").is(':checked');
      
+
           var hr2= new XMLHttpRequest();
           var url2="ajout_item.php";
           var cmpt=0;
@@ -169,13 +134,14 @@ $(document).ready(function(){
           hr2.onreadystatechange = function(){
             if(hr2.readyState==4 && hr2.status==200){
               var return_data2 = hr2.responseText;
-            document.getElementById('#formulaire_item').innerHTML = return_data2;
+            //document.getElementById('#formulaire_item').innerHTML = return_data2;
             }
           }
           hr2.send(vars);
-          document.getElementById('#formulaire_item').innerHTML="uploading the new item...";
+          //document.getElementById('#formulaire_item').innerHTML="uploading the new item...";
 
 
+          refresh_mr();
 
 
   });

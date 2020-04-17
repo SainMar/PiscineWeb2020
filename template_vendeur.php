@@ -62,6 +62,7 @@
     <style>
         .fond-orange{background-color: #FA8B07;}
         .param_selected{ background-color: #FA8B07; }
+        #gallery_item{ margin-top: 30px;}
     </style>
     <script>
 
@@ -206,7 +207,7 @@
                         <label class="form-check-label" for="inscri_item_enchere">Enchere</label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="inscri_item_meilloffre" disabled>
+                        <input class="form-check-input" type="checkbox" value="" id="inscri_item_meilloffre">
                         <label class="form-check-label" for="inscri_item_meilloffre">Meilleur Offre</label>
                     </div>
                     <div class="form-check">
@@ -221,7 +222,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submit_new_item">Save</button>
+                <button type="button" class="btn btn-primary" id="submit_new_item" data-dismiss="modal">Save</button>
               </div>
             </div>
           </div>
@@ -231,7 +232,7 @@
       </div>
       <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9">
+        <div class="col-lg-9" id="gallery_item">
 
         
 

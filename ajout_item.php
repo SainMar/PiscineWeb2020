@@ -11,6 +11,19 @@
     $achatimme =  isset($_POST["achatimme"])? $_POST["achatimme"]:"";
     $id_user_actual =  isset($_POST["id_user_actual"])? $_POST["id_user_actual"]:"";
 
+    if($enchere=="true")
+    {
+        $enchere=1;
+    }
+    if($meilloffre=="true")
+    {
+        $meilloffre=1;
+    }
+    if($achatimme=="true")
+    {
+        $achatimme=1;
+    }
+
     //identifier votre BDD
     $database = "ecebay";
     //identifier votre table
