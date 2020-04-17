@@ -9,11 +9,12 @@ div
 #top-content
 {
     background-color: #FA8B07;
+    height: 600px;
     
 }
 #top-top-content
 {
-    height:200px;
+    
 }
 #logo
 {
@@ -26,18 +27,20 @@ p
 }
 #mid-top-content
 {
-    height: 560px;
+    height: 500px;
+    padding-top: 200px;
 }
-.jumbotron
+.info-center
 {
-    margin-top: 200px;
+    margin-left: 100px;
+    color: white;
 }
 #bot-top-content
 {
-    height: 70px;
+    
     
 }
-#row-bot-top-content
+#raw-bot-top-content
 {
     margin-left: 33.5%;
     margin-right: auto;
