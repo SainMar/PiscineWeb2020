@@ -1,10 +1,14 @@
 <?php
   ///Pas encore utile mais besioin pour le panier et surement l'admin 
   session_start();
+
+  ///Acheteur type 1 ; vendeur type 2 ; admin type 3
   
   $_SESSION["type_user"]=2;
   $_SESSION["id_user_actual"]=1;
   $_SESSION["pseudo_user_actual"]="tutur";
+
+  
 
 
   include('fonction.php');
@@ -38,7 +42,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>ECEbay :: acheteur : <?php echo $nom_user.' '.$prenom_user ?></title>
+  <title>ECEbay :: vendeur : <?php  $_SESSION["pseudo_user_actual"] ?></title>
 
   <!-- Bootstrap core CSS -->
   <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -59,18 +63,20 @@
     <script src="script.js"></script>
     <!-- Custom styles for this template -->
   <link href="startbootstrap-shop-homepage-gh-pages/css/shop-homepage.css" rel="stylesheet">
-    <style>
+  <style>
         .fond-orange{background-color: #FA8B07;}
         .param_selected{ background-color: #FA8B07; }
-        #gallery_item{ margin-top: 30px;}
+        #gallery{ margin-top: 30px;}
+        #menu_g{ padding-left: 20px;}
     </style>
     <script>
 
         var param= <?php echo json_encode($param); ?>;
         var tab= <?php echo json_encode($tab);?>;
+        var para_panier=<?php echo json_encode($para_panier);?>;
+        var para_mana_vente=<?php echo json_encode($para_mana_vente);?>;
                     
     </script>
-
 </head>
 
 <body>
@@ -78,14 +84,14 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
     <div class="container">
-      <a class="navbar-brand" href="#">ECEbay</a>
+      <a class="navbar-brand" href="template_vendeur.php">ECEbay</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
+            <a class="nav-link" href="template_vendeur.php">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -93,7 +99,16 @@
             <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Panier</a>
+        <?php if($_SESSION["type_user"]==1)
+              {?>
+            <a class="nav-link" href="template_panier.php">Panier</a>
+        <?php }
+              ?>
+        <?php if($_SESSION["type_user"]==2)
+              {?>
+            <a class="nav-link" href="manager_vente.php">Manager de Vente</a>
+        <?php }
+              ?>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Paramètres</a>
@@ -232,7 +247,7 @@
       </div>
       <!-- /.col-lg-3 -->
 
-        <div class="col-lg-9" id="gallery_item">
+        <div class="col-lg-9" id="gallery">
 
         
 

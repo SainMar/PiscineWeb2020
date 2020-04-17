@@ -17,6 +17,19 @@
        
     </head>
     <body>
+    <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
+    <div class="container">
+
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="formulaire_connexion.php"><button type="button" class="btn btn-outline-light">Connexion</button></a>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+  </nav>
         <div class="container-fluid" id="top-content">
             
             <div class="row" id="top-top-content">
@@ -54,7 +67,7 @@
                     <hr class="my-4">
                     <p>Do you already have an account ?</p>
                     <p class="lead">
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Sign Up</a>
+                        <a class="btn btn-primary btn-lg" href="formulaire_inscription.php" role="button">Sign Up</a>
                     </p>
                     </div>
                 </div>

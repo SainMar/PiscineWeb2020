@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>ECEbay :: acheteur : <?php echo $nom_user.' '.$prenom_user ?></title>
+  <title>ECEbay :: connexion?></title>
 
   <!-- Bootstrap core CSS -->
   <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -31,14 +29,23 @@
     <script src="script.js"></script>
     <!-- Custom styles for this template -->
   <link href="startbootstrap-shop-homepage-gh-pages/css/shop-homepage.css" rel="stylesheet">
-    <style>
-        .fond-orange{background-color: #FA8B07;}
-        .param_selected{ background-color: #FA8B07; }
-    </style>
+  <style>
+    .fond-orange{background-color: #FA8B07;}
+    .param_selected{ background-color: #FA8B07; }
+    .row{ padding-top :50px ;
+      margin-left: 150px;   
+      padding-bottom :50px; }
+
+      .shadow-lg{ padding-top :50px ;
+        margin-left: 150px;   
+        padding-bottom :50px; }
+        .btn{margin-top:  20px; margin-right:  20px }
+      </style>
     <script>
 
         var param= <?php echo json_encode($param); ?>;
         var tab= <?php echo json_encode($tab);?>;
+
                     
     </script>
 
@@ -49,7 +56,7 @@
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
-    <div class="container">
+    <div class="container" >
       <a class="navbar-brand" href="#">ECEbay</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -76,26 +83,26 @@
   </nav>  
 
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-1">
+      <div class="row" id="main">
+          <div class="col-2">
 
           </div>
-          <div class="shadow-lg col-5">
+          <div class="shadow-lg col-5" >
               <!--Prenom et nom-->
               <form>
                     <div class="form-row">
 
-                        <div class="col-md-4 mb-3">
-                            <label for="validationServer01">First name</label>
-                            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+                        <div class="col-12">
+                            <label for="validationServer01">Pseudo</label>
+                            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Entrez votre pseudo"  required>
                             <div class="valid-feedback invisible">
                                 Looks good!
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
-                            <label for="validationServer02">Last name</label>
-                            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+                        <div class="col-12">
+                            <label for="validationServer02">Email</label>
+                            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Entrez votre adresse email" value="Otto" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -103,152 +110,36 @@
 
                         
                     <!--pseudo-->
-                        <div class="col-md-4 mb-3">
-                            <label for="validationServer07">Pseudo</label>
-                            <input type="text" class="form-control is-valid" id="validationServer07" placeholder="pseudo" value="Marto" required>
+                        <div class="col-12">
+                            <label for="validationServer07">Mot de passe</label>
+                            <input type="text" class="form-control is-invalid" id="validationServer07" placeholder="entrez votre mot de passe"  required>
                             <div class="valid-feedback invisible">
                                 Looks good!
                             </div>
                         </div>
                     </div>
                 
-                <!--email et mdp-->
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label for="validationServer08">email</label>
-                        <input type="text" class="form-control is-valid" id="validationServer08" placeholder="email" value="mark.otta@gmail.com" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
+               <div class="form-row">
+                <div class="col-6">
+                    <br>pas encore inscrit ? cliquez <a href="#">ici</a><br>
+
                 </div>
-                <!--telephone-->
-                <!--Adress et code postal-->
-                <!--Ville et pays-->
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                    <label for="validationServer03">City</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer04">State</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid state.
-                    </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer05">Zip</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid zip.
-                    </div>
-                    </div>
+                <div class="col-6">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                  Inscription
+                </button>
+              </div>
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                    <label class="form-check-label" for="invalidCheck3">
-                        Agree to terms and conditions
-                    </label>
-                    <div class="invalid-feedback">
-                        You must agree before submitting.
-                    </div>
-                    </div>
-                </div>
+
                 
                 </form>
                 <!--PDP et/ou fond_ecran-->
                 <!--Type user(acheteur ou vendeur uniquement-->
           </div>
-          <div class="col-5">
-               <!--Prenom et nom-->
-               <form>
-                    <div class="form-row">
 
-                        <div class="col-md-4 mb-3">
-                            <label for="validationServer01">First name</label>
-                            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
-                            <div class="valid-feedback invisible">
-                                Looks good!
-                            </div>
-                        </div>
+          <div class="col-2">
 
-                        <div class="col-md-4 mb-3">
-                            <label for="validationServer02">Last name</label>
-                            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                        </div>
-
-                        
-                    <!--pseudo-->
-                        <div class="col-md-4 mb-3">
-                            <label for="validationServer07">Pseudo</label>
-                            <input type="text" class="form-control is-valid" id="validationServer07" placeholder="pseudo" value="Marto" required>
-                            <div class="valid-feedback invisible">
-                                Looks good!
-                            </div>
-                        </div>
-                    </div>
-                
-                <!--email et mdp-->
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label for="validationServer08">email</label>
-                        <input type="text" class="form-control is-valid" id="validationServer08" placeholder="email" value="mark.otta@gmail.com" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                    </div>
-                </div>
-                <!--telephone-->
-                <!--Adress et code postal-->
-                <!--Ville et pays-->
-                <div class="form-row">
-                    <div class="col-md-6 mb-3">
-                    <label for="validationServer03">City</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                    </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer04">State</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer04" placeholder="State" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid state.
-                    </div>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                    <label for="validationServer05">Zip</label>
-                    <input type="text" class="form-control is-invalid" id="validationServer05" placeholder="Zip" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid zip.
-                    </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="form-check">
-                    <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                    <label class="form-check-label" for="invalidCheck3">
-                        Agree to terms and conditions
-                    </label>
-                    <div class="invalid-feedback">
-                        You must agree before submitting.
-                    </div>
-                    </div>
-                </div>
-                
-                </form>
-                <!--PDP et/ou fond_ecran-->
-                <!--Type user(acheteur ou vendeur uniquement-->
           </div>
-          <div class="col-1">
 
           </div>
       </div>
