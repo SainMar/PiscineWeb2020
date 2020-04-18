@@ -1,0 +1,159 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>ECEbay :: connexion?></title>
+
+  <!-- Bootstrap core CSS -->
+  <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+   -->
+  <link href="startbootstrap-shop-homepage-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  
+
+  <!--JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="script.js"></script>
+    <!-- Custom styles for this template -->
+  <link href="startbootstrap-shop-homepage-gh-pages/css/shop-homepage.css" rel="stylesheet">
+  <style>
+    .fond-orange{background-color: #FA8B07;}
+    .param_selected{ background-color: #FA8B07; }
+    #main{ margin-top: 50px;  padding-top :50px ;}
+
+      .shadow-lg{background-color:#E0E0E0 ; padding-bottom :10px; padding-top: 10px; margin-left: 10px; border-radius: 18px;}
+        .btn{margin-top:  20px; margin-right:  20px; }
+    #Tbuy{margin-top: 5px;padding-bottom:5px;}
+
+    #pic{ border-right: 3px solid black ;}
+
+    #photo { margin-left: 10px;}
+
+
+
+
+
+      </style>
+    <script>
+
+        var param= <?php echo json_encode($param); ?>;
+        var tab= <?php echo json_encode($tab);?>;
+
+                    
+    </script>
+
+</head>
+
+<body>
+    
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
+    <div class="container" >
+      <a class="navbar-brand" href="#">ECEbay</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Panier</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Paramètres</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>  
+  <div class="container-fluid" >
+
+      <h1> Liste de vos offres enchères </h1>
+
+    <div class="row" id="main">
+      <!-- <div class="shadow-lg col-8"> -->
+    
+      <div class="shadow-lg col-9">
+        <div class="row">
+          <div class="col-lg-6-md-4" id='pic'>
+        <img class="card-img-left" style="  border-radius: 16px;  padding-right: 5px; width: 350px;" 
+  src="arbre.jpg" alt="" id="photo" title="">
+      </div>
+
+          <div class="col-1">
+    </div>
+            
+            <div class="col-lg-6-md-4">
+          <div class="card-block">
+            <h2 class="card-title" id="Tbuy">Titre de L'objet de qualité</h2>
+            <h4 class="card-title" id="Tbuy">Derniere enchère a 55$</h4>
+
+                <p> fin des enchères dans:<h6 id="demo" style="text-decoration-color: red"></h6></p>
+           
+            <p class="card-text">Vendeur: EL Pacino</p>
+
+            <a href="#" class="btn btn-info">Info Item</a>
+          </div>
+        </div>
+      </div>
+      </div>
+
+  </div>
+</div>
+</div>
+  <script>
+  // Set the date we're counting down to
+var countDownDate = new Date("Jan 5, 2021 15:37:25").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
