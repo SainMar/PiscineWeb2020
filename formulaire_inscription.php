@@ -34,12 +34,51 @@
     .fond-orange{background-color: #FA8B07;}
     .param_selected{ background-color: #FA8B07; }
     .shadow-lg { padding-top :50px ;
-      margin-left: 10px; 
-      padding-bottom :50px;}
+     
+      /*margin-right: 150px;*/
+      padding-bottom :50px;
 
-        .row{ padding-top :50px ;
-      margin-left: 150px;   
-      padding-bottom :50px; }
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        /* bring your own prefixes */
+        transform: translate(-50%, -40%);
+
+        border-radius: 16px;
+
+
+    }
+
+      #signup{font-family: Arial, Helvetica, sans-serif;
+font-size: 15px;
+letter-spacing: 0px;
+word-spacing: 0px;
+color: #000000;
+font-weight: normal;
+text-decoration: underline solid rgb(68, 68, 68);
+font-style: normal;
+font-variant: normal;
+text-transform: none;}
+
+
+      #inscription{  text-align: center;
+          padding-top: 75px;}
+
+        #pay{margin-bottom: 10px; margin-top: 40px;}
+
+    #creation{text-align: center;
+            padding-top: 25px;
+
+            /*POLICE TITRE*/
+            
+            font-size: 40px;
+            letter-spacing: 0.5px;
+            word-spacing: 1px;
+            color: #000000;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            }
 
 
   </style>
@@ -57,45 +96,74 @@
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">ECEbay</a>
+    <div class="container-fluid">
+      <a class="navbar-brand" href="index.php">ECEbay</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
+            <a class="nav-link" href="formulaire_connexion.php"><button type="button" class="btn btn-outline-light">Connexion</button></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Panier</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Paramètres</a>
-          </li>
+          
         </ul>
       </div>
     </div>
   </nav>  
+  <!--tu vas creer un nouveau container  -->
+  <?php if(isset(elem1)&&isset(elem2)&&...&&(elemdernier))
+  {
+    $existe_boy= false;
+    ///ouvre la bdd des users 
+    //parcourir la bdd des users 
+    if(mail || pseudo  existent)
+    {
+      $existe_boy=true;
+      
+    }
+    ///fin boucle de parcourir tableau
+    if($existe_boy==true)
+    {
+      echo'';/// <p> disant que ce pseudo ou ce mail existe deja 
+    }
+    if($existe_boy==false)
+    {
+       /// insert into la table `users` toutes les infos 
 
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-1">
 
-      </div>
-      <div class="shadow-lg col-5">
+        /// redirection à la page de catalogue 
+          /// re faire requete recupérer avec pseudo la ligne du users dzns users 
+          /// $_SESSION['id_user_actual']= id_user;
+          /// $_SESSION['pseudo_user_actual']=pseudo;
+          ///$_SESSION['type_user']= type_user;
+          /// fonction fredireigte vers catalgue 
+    }
+
+
+  }
+  else 
+  {
+    echo ''; ///<p> completez tous les champs 
+  }
+  ?>
+          <div class="container shadow-lg " >
+            <div class="container-fluid" id="creation">
+                <h1> Inscription</h1>
+
+            </div>
+    <div class="container"  id="pay">
+    
+    <h4> Informations personnelles</h4>
+  </div>
+
         <!--Prenom et nom-->
         <form>
-          <div class="form-row">
+          <div class="form-row" id=signup>
 
             <div class="col-md-4 mb-3">
               <label for="validationServer01">Nom</label>
-              <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Entrez votre nom"  required>
+              <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Entrez votre nom" size="4" required>
               <div class="valid-feedback invisible">
                 Looks good!
               </div>
@@ -103,7 +171,7 @@
 
             <div class="col-md-4 mb-3">
               <label for="validationServer02">Prénom</label>
-              <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Entrez votre prénom" value="Otto" required>
+              <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Entrez votre prénom" value="Entrez votre prénom" required>
               <div class="valid-feedback">
                 Looks good!
               </div>
@@ -121,7 +189,7 @@
           </div>
 
           <!--email et mdp-->
-          <div class="form-row">
+          <div class="form-row" id=signup>
             <div class="col-md-4 mb-3">
               <label for="validationServer04">email</label>
               <input type="text" class="form-control is-valid" id="validationServer04" placeholder="Entrez votre email" value="mark.otta@gmail.com" required>
@@ -145,7 +213,7 @@
             </div>
           </div>
           <!--telephone-->
-          <div class="form-row">
+          <div class="form-row" id=signup>
             <div class="col-md-4 ">
               <label for="validationServer07">Numéro de téléphone</label>
               <input type="text" class="form-control is-invalid" id="validationServer07" placeholder="Entrez votre numéro" required>
@@ -163,7 +231,7 @@
           </div>
           <!--Adress et code postal-->
           <!--Ville et pays-->
-          <div class="form-row">
+          <div class="form-row"id=signup>
             <div class="col-md-4 mb-3">
               <label for="validationServer09">Pays</label>
               <input type="text" class="form-control " id="validationServer09" placeholder="Pays" required>
@@ -182,11 +250,14 @@
         </form>
         <!--PDP et/ou fond_ecran-->
         <!--Type user(acheteur ou vendeur uniquement-->
-      </div>
-      <div class="shadow-lg col-5">
+      
+    <div class="container-fluid"  id="paiment">
+    
+    <h4 id=pay> Mode de paiment</h4>
+  </div>
        <!--Prenom et nom-->
        <form>
-        <div class="form-row">
+        <div class="form-row"id=signup>
           <div class="col-12">
             <label for="validationServer01">Numéro de carte</label>
             <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
@@ -195,10 +266,10 @@
             </div>
           </div>
         </div>
-        <div class="form-row">
+        <div class="form-row"id=signup>
           <div class="col-md-8">
             <label for="validationServer02">Nom du titulaire</label>
-            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Nom sur votre carde de crédit" required>
             <div class="valid-feedback">
               Looks good!
             </div>
@@ -210,7 +281,7 @@
           <!--pseudo-->
           <div class="col-md-4">
             <label for="validationServer07">CVV</label>
-            <input type="text" class="form-control is-valid" id="validationServer07" placeholder="pseudo" value="Marto" required>
+            <input type="text" class="form-control is-valid" id="validationServer07" placeholder="pseudo" value="3 ou 4 chiffre derrière votre CB" required>
             <div class="valid-feedback invisible">
               Looks good!
             </div>
@@ -218,7 +289,7 @@
         </div>
 
         <!--email et mdp-->
-        <div class="form-row">
+        <div class="form-row"id=signup>
 
           <div class="col-md-6">
             <label for="validationServer01">Date d'expiration</label>
@@ -251,9 +322,10 @@
           </div>
         </div>
 
-        <div class="form-row">
+        <div class="form-row" id=signup>
+          <div class="col-6">
           <div class="form-check">
-              <div class="col-8">
+              
                 <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
                 <label class="form-check-label" for="invalidCheck3">
                   Agree to terms and conditions
@@ -262,18 +334,16 @@
                   You must agree before submitting.
                 </div>
               </div>
-              <div class="col-4">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                  Inscription
+
+          </div>
+                        <div class="col-4">
+                <button type="button" class="btn btn-outline-info " style="padding-top: 10px;" data-toggle="modal" data-target="#exampleModalCenter">
+                  inscription
                 </button>
               </div>
-          </div>
         </div>
       </form>
-    </div>
-    <div class="col-1">
-
-    </div>
+      </div>
 
   </div>
 
