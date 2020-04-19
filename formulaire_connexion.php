@@ -1,3 +1,13 @@
+<?php
+include('fonction.php');
+
+$database="login";
+
+$dbh=connect_ddb($database);
+
+session_start();
+
+?>
 
 
 <!DOCTYPE html>
@@ -34,14 +44,58 @@
   <style>
     .fond-orange{background-color: #FA8B07;}
     .param_selected{ background-color: #FA8B07; }
-    .row{ padding-top :50px ;
-      margin-left: 150px;   
-      padding-bottom :50px; }
+    #form{ padding-top :50px ;}
 
-      .shadow-lg{ padding-top :50px ;
-        margin-left: 150px;   
-        padding-bottom :50px; }
-        .btn{margin-top:  20px; margin-right:  20px }
+
+         
+
+      .shadow-lg{  
+              position: fixed;
+              top: 50%;
+              left: 50%;
+              /* bring your own prefixes */
+              transform: translate(-50%, -50%);
+
+            /*POLICE BLABLA*/
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 15px;
+            letter-spacing: 0px;
+            word-spacing: 0px;
+            color: #000000;
+            font-weight: normal;
+
+            font-style: normal;
+            font-variant: normal;
+            text-transform: none;
+
+
+            border-radius: 16px;
+            }
+
+
+
+       
+      .btn{margin-top:  20px; margin-right:  20px; }
+
+      #connexion{text-align: center;
+          padding-top: 75px;
+
+
+                /*POLICE TITRE*/
+
+                font-size: 40px;
+                letter-spacing: 0.5px;
+                word-spacing: 1px;
+                color: #000000;
+                font-weight: normal;
+                font-variant: normal;
+                text-transform: none;
+
+              }
+
+
+
+
       </style>
     <script>
 
@@ -58,45 +112,96 @@
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
-    <div class="container" >
-      <a class="navbar-brand" href="#">ECEbay</a>
+    <div class="container-fluid" >
+      <a class="navbar-brand" href="index.php">ECEbay</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Panier</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Paramètres</a>
-          </li>
-        </ul>
-      </div>
+      
     </div>
   </nav>  
+    <!-- container -->
+    <?php  
 
-  <div class="container-fluid">
-      <div class="row" id="main">
-          <div class="col-2">
+    if (isset ($_POST['valider'])){
 
-          </div>
-          <div class="shadow-lg col-5" >
+    $pseudo=$_POST['pseudo'];
+    $email=$_POST['email'];
+    $mdp=$_POST['mdp'];
+
+    $il_est_la=false;
+    if(isset($pseudo)&&isset($email)&&isset($mdp))
+    {
+      /* Ouvre bdd
+      select toutes les lignes*/
+      $sql="SELECT * FROM `users`";
+      $result=$dbh->prepare($sql);
+      $result->execute(); 
+      
+
+
+
+    while ($total=$result->fetchAll())
+            {
+                 //tu parcoure le tableau resultant
+                foreach($total as $data)
+                {
+                      if(($data["pseudo"]==$pseudo)&&($data["mdp"]==$mdp)||($data["email"]==$email)&&($data["mdp"]==$mdp))
+                      {
+
+                                  /// redirection à la page de catalogue 
+                                  /// re faire requete recupérer avec pseudo la ligne du users dzns users 
+                                  /// $_SESSION['id_user_actual']= id_user;
+                                  /// $_SESSION['pseudo_user_actual']=pseudo;
+                                  ///$_SESSION['type_user']= type_user;
+                                  /// fonction fredireigte vers catalgue 
+                        $il_est_la=true;
+
+                       }
+                  echo $data["nom"];
+                }
+                
+            }
+/*        if(email_user= mail && password_user= password)
+        {
+
+
+            $il_est_la=true;
+        }*/
+        
+      // fin tableau des users
+        if($il_est_la==false)
+        {
+          echo '<p> combinaison email/mdp ou pseudo/mdp incorrect'; /// <p> c pas bon 
+        }
+      
+    }
+
+    else{
+      echo "<p> Veuillez remplir tout les champs";
+    }
+    
+    }
+    
+    ?>
+
+
+
+          <div class="container shadow-lg " >
+
+              <div class="container-fluid"  id="connexion">
+    
+    <h1> Connexion</h1>
+  </div>
+
+        <div id="cadre">
               <!--Prenom et nom-->
               <form>
-                    <div class="form-row">
+                    <div class="form-row" id="form">
 
                         <div class="col-12">
                             <label for="validationServer01">Pseudo</label>
-                            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Entrez votre pseudo"  required>
+                            <input type="text" class="form-control is-valid" id="validationServer01" name="pseudo" placeholder="Entrez votre pseudo"  required>
                             <div class="valid-feedback invisible">
                                 Looks good!
                             </div>
@@ -104,7 +209,7 @@
 
                         <div class="col-12">
                             <label for="validationServer02">Email</label>
-                            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Entrez votre adresse email" value="Otto" required>
+                            <input type="text" name="email" class="form-control is-valid" id="validationServer02" placeholder="Entrez votre adresse email" value="Entrez votre adresse email" required>
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -114,24 +219,26 @@
                     <!--pseudo-->
                         <div class="col-12">
                             <label for="validationServer07">Mot de passe</label>
-                            <input type="text" class="form-control is-invalid" id="validationServer07" placeholder="entrez votre mot de passe"  required>
+                            <input type="text" name="mdp" class="form-control is-invalid" id="validationServer07" placeholder="entrez votre mot de passe"  required>
                             <div class="valid-feedback invisible">
                                 Looks good!
                             </div>
                         </div>
                     </div>
                 
-               <div class="form-row">
-                <div class="col-6">
-                    <br>pas encore inscrit ? cliquez <a href="#">ici</a><br>
+              <div class="form-row" style="padding-bottom: 25px; padding-bottom: 25px;">
+                
+                <div class="col-6" style="margin-left: 10px;">
+                  <button type="button" class="btn btn-info" name="valider"data-toggle="modal" data-target="#exampleModalCenter">
+                    Connexion
+                  </button>
+                  <div class="col-7" style="padding-left: unset;">
+                      <br>pas encore inscrit ? cliquez <a href="#">ici</a><br>
 
+                  </div>
+                  
                 </div>
-                <div class="col-6">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                  Inscription
-                </button>
               </div>
-                </div>
 
                 
                 </form>
@@ -139,13 +246,10 @@
                 <!--Type user(acheteur ou vendeur uniquement-->
           </div>
 
-          <div class="col-2">
-
-          </div>
-
-          </div>
+ 
       </div>
   </div>
+
   
   
 
