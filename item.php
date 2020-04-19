@@ -28,8 +28,50 @@
 
 	<style>
 
+
 		.fond-orange{background-color: #FA8B07;}
 		.param_selected{ background-color: #FA8B07; }
+
+
+html, body {
+    height: 100%;
+}
+
+.round {
+	position: fixed;
+  border-radius: 50%;
+  background-color: #f1f1f1;
+  color: black;
+    text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  margin-left:  70px;
+  margin-top: 30px;
+}
+
+.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;*/
+        /*background: #eee;*/
+}
+
+.page-wrap {
+        padding-top: 100px;
+    min-height: 100%;
+    margin-bottom: -80px; 
+        box-sizing:border-box;
+}
+.page-wrap:after {
+    content: "";
+    display: block;
+}
+.site-footer, .page-wrap:after {
+    height: 80px; 
+}
+
 
 		#description{font-size: 14px;
 			letter-spacing: 0px;
@@ -47,12 +89,23 @@
 				top: 50%;
 				left: 50%;
 				/* bring your own prefixes */
-				transform: translate(-50%, -50%);}
+				transform: translate(-50%, -60%);
+
+			}
+
+			.mybtn{float:left;padding:15px;display:inline-block;}
+
+.mycontainer{display:flex;align-items:center;}
 
 			</style>
+
+		
 		</head>
 		<body>
 
+						<a href="#" class="previous round" id="fixed">&#8249;</a>
+
+<div class="page-wrap">
 			<!-- Navigation -->
 			<nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
 				<div class="container" >
@@ -80,16 +133,16 @@
 					</div>
 				</div>
 			</nav>  
+		
 
-			<div class="container" style=" border: 5px outset rgba(224,168,29,0.91);" id="item">
-
+			<div class="container shadow-lg " style="border-radius: 8px;" id="item">
 				<div class="row justify-content-md-center" >
 
 
 
 
 
-					<div class="col-lg-6" style=""id='pic'>
+					<div class=" col-lg-6" style=""id='pic'>
 						 <img class="" style="  border-radius: 16px;   width: 100%;
   height: auto;"  
 						src="arbre.jpg" alt="" id="photo" title=""> 
@@ -100,7 +153,7 @@
 						<div class="card" style="border: 3px solid black; border-radius: 15px;">
 							<h3 class="card-header" style="border-radius: 15px;">Titre Item</h3>
 							<div class="card-body" style="margin-top: 20px;margin-bottom: 5px;">
-							<div style="margin-bottom: 60px;">
+							<div style="margin-bottom: 89px;">
 								<h5 class="card-title"><strong>Vendeur:</strong> Elpacino<br></h5>
 								<p class="card-text" id="description"><strong>Description:</strong> (du latin arbor issu du vieux latin arbos, à l'étymologie incertaine, le linguiste Julius Pokorny le rapprochant de arduus et de l'indo-européen commun er(ə)d-, « grandir, grand », </p>
 							</div>
@@ -108,18 +161,18 @@
 
 
 								<div class="row">
-									<div class="col-8">
+									<div class="col-9">
 
 										<div class="row" id=signup>
 
-											<div class="col-md-8 ">
+											<div class="col-md-9 ">
 												<p>Obtenez directement pour <strong>29$99</strong></p>
 
 											</div>
 
 
 
-											<div class="col-md-4">
+											<div class="col-md-2">
 
 												<a href="#" class="btn btn-primary">Achat immédiat</a>
 											</div>
@@ -128,15 +181,15 @@
 								</div>
 
 								<div class="row">
-									<div class="col-8">
+									<div class="col-9">
 
 
 										<div class="row" id=signup>
-											<div class="col-md-8">
-												<p>Dernière enchère: <strong>15$</strong></p>
+											<div class="col-md-9">
+												<p>Départ des enchères: <strong>15$</strong></p>
 
 											</div>
-											<div class="col-md-4">
+											<div class="col-md-2">
 
 												<a href="#" class="btn btn-primary">Enchérir</a>
 											</div>
@@ -149,7 +202,7 @@
 									<div class="col-9">
 										<div class="row justify-content-center border rounded-pill" style="margin-top: 10px; margin-bottom:10px;">
 											<div class="col-md-6" style="margin-top: 5px;" >
-												<p > départ des enchères:</p>
+												<p >Fin des enchères dans:</p>
 											</div>
 
 											<div class="col-md-6" >
@@ -164,18 +217,18 @@
 								</div>
 
 								<div class="row">
-									<div class="col-8">
+									<div class="col-9">
 
 										<div class="row" id=signup>
 
-											<div class="col-md-8 ">
+											<div class="col-md-9 ">
 												<p>départ des offres:<strong>29$99</strong></p>
 
 											</div>
 
 
 
-											<div class="col-md-4">
+											<div class="col-md-2">
 
 												<a href="#" class="btn btn-primary">Faire une offre</a>
 											</div>
@@ -191,6 +244,21 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+			  <footer class="py-3 site-footer " style="background-color:#FA8B07; ">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; ECEBay 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+
+
+
+
+
+
 
 				<script>
   // Set the date we're counting down to
