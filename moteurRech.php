@@ -1,5 +1,6 @@
 <?php
-        include('fonction.php');
+      session_start();
+      include('fonction.php');
 
 
         //identifier votre BDD
@@ -55,6 +56,30 @@
         }
         if($cpt==0)
         {
+
+            ///uniquement item non-vendus
+            if($id!=1)
+            {
+                    $sql.=" WHERE status LIKE 0 AND interdit LIKE 0";
+                    $id=1;
+            }
+            else
+            {
+                    $sql.=" AND `$table`.status LIKE 0 AND interdit LIKE 0";
+            }
+            if(($_SESSION['type_user']==2)||($_SESSION['type_user']==3))
+            {
+                if($id!=1)
+                {
+                    $sql.=" WHERE id_vendeur LIKE ".$_SESSION['id_user_actual'];
+                    $id=1;
+                }
+                else
+                {
+                    $sql.=" AND id_vendeur LIKE ".$_SESSION['id_user_actual'];
+                }
+            }
+            
             ///Enchere
             if($enchere=="true")
             {
@@ -68,6 +93,7 @@
                     $sql.=" AND id_enchere LIKE 1";
                 }
             }
+            
             ///Meilleure offre
             if($meill_offre=="true")
             {
@@ -157,9 +183,9 @@
             }
             
         }
-
-        
-        
+    
+     
+       
         //$result = $dbh->query($sql);
         $result=$dbh->prepare($sql);
         $result->execute();
@@ -188,22 +214,44 @@
                 {
                 
 
-                    echo '<div class="col-lg-4 col-md-6 mb-4">';
+                    echo '<div class="col-lg-4 col-md-6 mb-4 '.$data['id'].'">';
                     echo '<div class="card h-100">' ;
-                    echo'<a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>';
+                    echo'<a href="#"><img class="card-img-top" src="images/'.$data['img1'].'" alt=""></a>';
                     echo'<div class="card-body">';
                     echo    '<h4 class="card-title">';
-                    echo'    <a href="#">'.$data['nom'].'</a>';
+                    echo'   <form action="template_items.php" method="POST">';
+                    echo'       <input type="text" id="id_item" name="id_item" class="invisible" value="'.$data["id"].'">';
+                    echo'       <input type="submit" value="'.$data['nom'].'" class="btn btn-lg btn-outline-info btn_info_item">';
+                    echo'   </form>';
                     echo'    </h4>';
-                    echo'   <h5>'.$data['prix'].'</h5>';
-                    echo'   <p class="card-text">Qualité: '.$data['qualite'].'</p>
-                            <p class="card-text">Defaut: '.$data['default'].'</p>
+                    echo'   <h5>'.$data['prix'].' euros</h5>';
+                    echo'   
                             </div>';
-                    echo'<div class="card-footer">';
-                    echo'    <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
-                            </div>
-                            </div>
-                        </div>';
+                            $sqlam="SELECT * FROM `users` WHERE id_user=".$data['id_vendeur'];
+                            $resultam=$dbh->prepare($sqlam);
+                            $resultam->execute();
+                            while ($totalam=$resultam->fetchAll())
+                            {
+                                foreach($totalam as $dataam)
+                                {
+                                    echo'<h6 id="nom_vend">par '.$dataam['pseudo'].'</h6>';
+                                }
+                            }
+    
+                              
+                                echo'<div class="card-footer">';
+                        
+                        if($_SESSION['type_user']==1)
+                        {
+                                echo'    <button type="button" class="btn btn-primary btn-block add_panier" id="'.$data['id'].'" >+Add</button>';
+                        }
+                        if($_SESSION['type_user']!=1)
+                        { 
+                                 echo'    <button type="button" class="btn btn-danger btn-block supp_item" id="'.$data['id'].'" >-Supp</button>';
+                        }
+                        echo'        </div>
+                                </div>
+                            </div>';
 
 
                         

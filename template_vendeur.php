@@ -3,16 +3,15 @@
   session_start();
 
   ///Acheteur type 1 ; vendeur type 2 ; admin type 3
+ 
   
-  $_SESSION["type_user"]=2;
-  $_SESSION["id_user_actual"]=1;
-  $_SESSION["pseudo_user_actual"]="tutur";
-
   
 
 
   include('fonction.php');
   include('tableau.php');
+
+
   $database="ecebay";
   $dbh=connect_ddb($database);
   $sql="SELECT * FROM `categorie`";
@@ -42,11 +41,8 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>ECEbay :: vendeur : <?php  $_SESSION["pseudo_user_actual"] ?></title>
+  <title>ECEbay :: items/catalogue : <?php  $_SESSION["pseudo_user_actual"] ?></title>
 
-  <!-- Bootstrap core CSS -->
-  <!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-   -->
   <link href="startbootstrap-shop-homepage-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   
@@ -61,6 +57,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="script.js"></script>
+    <script src="script2.js"></script>
     <!-- Custom styles for this template -->
   <link href="startbootstrap-shop-homepage-gh-pages/css/shop-homepage.css" rel="stylesheet">
   <style>
@@ -68,6 +65,23 @@
         .param_selected{ background-color: #FA8B07; }
         #gallery{ margin-top: 30px;}
         #menu_g{ padding-left: 20px;}
+        .shadow-lg{background-color:#E0E0E0 ; padding-bottom :10px; padding-top: 10px;}
+        #pic{ border-right: 3px solid black ;}
+        html, body {
+                      height: 100%;
+                    }
+        body {
+                      display: flex;
+                      flex-direction: column;
+                    }
+        .content {
+                      flex: 1 0 auto;
+                    }
+        .footer {
+                      flex-shrink: 0;
+                    }
+                    #nom_vend{margin-left: 20px;}
+
     </style>
     <script>
 
@@ -75,6 +89,7 @@
         var tab= <?php echo json_encode($tab);?>;
         var para_panier=<?php echo json_encode($para_panier);?>;
         var para_mana_vente=<?php echo json_encode($para_mana_vente);?>;
+        var id_user_actual=<?php echo json_encode($_SESSION['id_user_actual']);?>;
                     
     </script>
 </head>
@@ -83,20 +98,28 @@
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
-    <div class="container">
+    <div class="container-fluid">
       <a class="navbar-brand" href="template_vendeur.php">ECEbay</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="template_vendeur.php">Home
-              <span class="sr-only">(current)</span>
-            </a>
+          <li class="nav-item">
+          <?php if($_SESSION["type_user"]==1)
+              {?>
+                <a class="nav-link" href="template_vendeur.php">Catalogue</a>
+        <?php }
+              ?>
+        <?php if(($_SESSION["type_user"]==2)||($_SESSION["type_user"]==3))
+              {?>
+                  <a class="nav-link" href="template_vendeur.php">Mes items</a>
+        <?php }
+              ?> 
+            
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
+            <a class="nav-link" href="about.php">About</a>
           </li>
           <li class="nav-item">
         <?php if($_SESSION["type_user"]==1)
@@ -104,34 +127,54 @@
             <a class="nav-link" href="template_panier.php">Panier</a>
         <?php }
               ?>
-        <?php if($_SESSION["type_user"]==2)
+        <?php if(($_SESSION["type_user"]==2)||($_SESSION["type_user"]==3))
               {?>
-            <a class="nav-link" href="manager_vente.php">Manager de Vente</a>
+            <a class="nav-link" href="manager_vente.php">Suivi Transactions</a>
         <?php }
               ?>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Paramètres</a>
+           
+            <div class="dropdown">
+            <a class="nav-link dropdown-toggle" type="link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Paramètres</a>
+                
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                <a href="about.php" class="dropdown-item option" type="button" id="enchere">About</a>
+                <?php if($_SESSION["type_user"]==3)
+              {?>
+                <a href="template_admin.php" class="dropdown-item option" type="button" id="meilloffre">Admin</a>
+              <?php }?>
+              <?php if(($_SESSION["type_user"]==2)||($_SESSION["type_user"]==3))
+              {?>
+                <a href="manager_vente.php" class="dropdown-item option" type="button" id="meilloffre">Suivi Transactions</a>
+              <?php }?>
+              <?php if($_SESSION["type_user"]==1)
+              {?>
+                <a href="template_panier.php" class="dropdown-item option" type="button" id="meilloffre">Panier</a>
+              <?php }?>
+                <a href="deconnexion.php" class="dropdown-item option" type="button" id="achatimme">Déconnexion</a>
+            </div>
+        </div>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
   <!-- Page Content -->
-  <div class="container">
+  <div class="container content">
 
  
     
     <div class="row">
 
       <div class="col-lg-3">
-
-        <h1 class="my-4">Shop Name </h1>
+                
+        <h1 class="my-4" style="padding-top: 20px;">Stock Personel </h1>
         <h2 id="result"></h2>
         <h6>Choisis une catégorie:</h6>
         <div class="dropdown">
-            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary btn-lg dropdown-toggle btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Catégorie
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -157,7 +200,7 @@
 
         <h6>Choisis un type d'achat:</h6>
         <div class="dropdown">
-            <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary btn-lg dropdown-toggle btn-block" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Type d'achats
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
@@ -168,81 +211,110 @@
         </div>
 
         <h6>Mot Clef:</h6>
-        <input type='text' name="bar_rech" id="bar_rech" >
+        <input class="btn-block" type='text' name="bar_rech" id="bar_rech" >
 
-
+        <?php if($_SESSION['type_user']!=1) 
+        {?>                        
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
-          + Add items
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#formu_item">
+          + Add item 
         </button>
-
+        <?php }?>
+        <div id="news"></div>
         <!-- Modal -->
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal fade" id="formu_item" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Add Item</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body"id="formulaire_item">
-                
-                <form>
-                    <div class="row">
-                        <div class="col">
-                        <label for="inscri_item_nom">Name of Item</label>
-                        <input type="text" class="form-control" id="inscri_item_nom">
-                        </div>
-                        <div class="col">
-                        <label for="inscri_item_prix">Price</label>
-                        <input type="number" class="form-control" placeholder="0" id="inscri_item_prix">
-                        </div>
-                    </div>
-                    <?php for($i=0; $i<5;$i++){?>
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Image<?php echo $i+1;?></label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                    </form>
-                    <?php $i+1; }?>
-                    <div class="form-group">
-                        <label for="inscri_item_qualite">Qualite</label>
-                        <textarea class="form-control" id="inscri_item_qualite" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="inscri_item_default">Default</label>
-                        <textarea class="form-control" id="inscri_item_default" rows="3"></textarea>
+
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Add Item</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+
+                <div class="modal-body"id="formulaire_item">
+                  
+                  <form>
+                      <div class="from-group">
+                          <div class="col">
+                          <label for="inscri_item_nom">Name of Item</label>
+                          <input type="text" class="form-control" id="inscri_item_nom" required>
+                          </div>
+                          <div class="col">
+                          <label for="inscri_item_prix">Price</label>
+                          <input type="number" class="form-control" placeholder="0" id="inscri_item_prix" required>
+                          </div>
+                      </div>
+                      <?php for($i=0; $i<1;$i++){?>
+                      
+                          <div class="form-group">
+                              <label for="exampleFormControlFile1">Image<?php echo $i+1;?></label>
+                              <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                          </div>
+                      
+                      <?php $i+1; }?>
+                      <div class="form-group">
+                          <label for="inscri_item_qualite">Qualite</label>
+                          <textarea class="form-control" id="inscri_item_qualite" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                          <label for="inscri_item_default">Default</label>
+                          <textarea class="form-control" id="inscri_item_default" rows="3"></textarea>
+                      </div>
+                      <div class="form-group">
+                      <select class="form-control cat" name="categorie" id="categorie" required>
+                        <option>Choisissez une catégorie</option disable>
+                        <?php $sql="SELECT * FROM `categorie`";
+
+                        $result_cat=$dbh->prepare($sql);
+                        $result_cat->execute(); 
+                        while ($total_cat=$result_cat->fetchAll())
+                              {
+                        
+                                  foreach($total_cat as $data)
+                                  { 
+                                      echo'<option>'.$data['nom'].'#'.$data['id_cat'].'</option>';
+                        
+                                  }
+                              }?>
+                      </select>
                     </div>
 
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="inscri_item_enchere" required>
+                          <label class="form-check-label" for="inscri_item_enchere">Enchere</label>
+                      </div><br>
+                      <div class="col">
+                          <label for="inscri_dateF">Date et heure:</label>
+                          <input type="datetime-local" class="form-control" placeholder="0" id="inscri_dateF" required>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="inscri_item_meilloffre" required>
+                          <label class="form-check-label" for="inscri_item_meilloffre">Meilleur Offre</label>
+                      </div>
+                      <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="inscri_item_achatimme" required>
+                          <label class="form-check-label" for="inscri_item_achatimme">Achat immediat</label>
+                      </div>
+                      <br><br>
+                      <div class="form-group">
+                          <label>Pseudo du Vendeur: <?php echo $_SESSION["pseudo_user_actual"];?></label>  
+                      </div>
+                      
+                  </form>
+                </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="inscri_item_enchere">
-                        <label class="form-check-label" for="inscri_item_enchere">Enchere</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="inscri_item_meilloffre">
-                        <label class="form-check-label" for="inscri_item_meilloffre">Meilleur Offre</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="inscri_item_achatimme">
-                        <label class="form-check-label" for="inscri_item_achatimme">Achat immediat</label>
-                    </div>
-                    <br><br>
-                    <div class="form-group">
-                        <label>Pseudo du Vendeur: <?php echo $_SESSION["pseudo_user_actual"];?></label>  
-                    </div>
-                </form>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="submit_new_item" data-dismiss="modal">Save</button>
-              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" data-dismiss="modal" class="btn btn-primary btn-block submit_new_item">Save</button>
+                </div>
             </div>
           </div>
         </div>
+        <div class="conteiner-fluid" id="news">
 
+        </div>
         
       </div>
       <!-- /.col-lg-3 -->

@@ -22,6 +22,11 @@ function refresh_mrmv(){
             if(hr.readyState==4 && hr.status==200){
               var return_data=hr.responseText;
               document.getElementById('transaction').innerHTML = return_data;
+              function reload_js() {
+                $('script[src="mana_vente2.js"]').remove();
+                $('<script>').attr('src', 'mana_vente2.js').appendTo('head');
+                }
+                reload_js();
             }
           }
           hr.send(vars);
@@ -64,6 +69,8 @@ $(document).ready(function(){
         refresh_mrmv();
 
     });
+    
+    
 
 
 

@@ -6,11 +6,12 @@
   $tab["prix"]=0;
   $tab["qualite"]="";
   $tab["default"]="";
-  $tab["id_cat"]=1;
+  $tab["id_cat"]=0;
   $tab["id_user_actual"]=$_SESSION["id_user_actual"];
   $tab["enchere"]=false;
   $tab["meilloffre"]=false;
   $tab["achatimme"]=false;
+  $tab["dateF"]="0000-00-00T00:00";
   ///Fin $tab
 
 

@@ -1,3 +1,15 @@
+<?php
+session_start();
+include('fonction.php');
+
+$database="ecebay";
+
+$dbh=connect_ddb($database);
+
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -111,46 +123,25 @@ text-transform: none;}
       </div>
     </div>
   </nav>  
-  <!--tu vas creer un nouveau container  -->
-  <?php if(isset(elem1)&&isset(elem2)&&...&&(elemdernier))
-  {
-    $existe_boy= false;
-    ///ouvre la bdd des users 
-    //parcourir la bdd des users 
-    if(mail || pseudo  existent)
-    {
-      $existe_boy=true;
-      
-    }
-    ///fin boucle de parcourir tableau
-    if($existe_boy==true)
-    {
-      echo'';/// <p> disant que ce pseudo ou ce mail existe deja 
-    }
-    if($existe_boy==false)
-    {
-       /// insert into la table `users` toutes les infos 
+  
 
 
-        /// redirection à la page de catalogue 
-          /// re faire requete recupérer avec pseudo la ligne du users dzns users 
-          /// $_SESSION['id_user_actual']= id_user;
-          /// $_SESSION['pseudo_user_actual']=pseudo;
-          ///$_SESSION['type_user']= type_user;
-          /// fonction fredireigte vers catalgue 
-    }
 
 
-  }
-  else 
-  {
-    echo ''; ///<p> completez tous les champs 
-  }
-  ?>
+
+<form name="inscription" method="post" action="formulaire_inscription2.php">
+
           <div class="container shadow-lg " >
             <div class="container-fluid" id="creation">
                 <h1> Inscription</h1>
 
+  <div class="form-group">
+    <select class="form-control" name="type_user"id="exampleFormControlSelect1">
+      <option>Acheteur</option>
+      <option>Vendeur</option>
+
+    </select>
+  </div>
             </div>
     <div class="container"  id="pay">
     
@@ -158,33 +149,27 @@ text-transform: none;}
   </div>
 
         <!--Prenom et nom-->
-        <form>
+
           <div class="form-row" id=signup>
 
             <div class="col-md-4 mb-3">
-              <label for="validationServer01">Nom</label>
-              <input type="text" class="form-control is-valid" id="validationServer01" placeholder="Entrez votre nom" size="4" required>
-              <div class="valid-feedback invisible">
-                Looks good!
-              </div>
+              <label for="nom">Nom</label>
+              <input type="text" class="form-control" id="nom" name="nom"  placeholder="Entrez votre nom" size="4" required>
+              
             </div>
 
             <div class="col-md-4 mb-3">
               <label for="validationServer02">Prénom</label>
-              <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Entrez votre prénom" value="Entrez votre prénom" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <input type="text" class="form-control" id="validationServer02"  name="prenom" placeholder="Entrez votre prénom" required>
+              
             </div>
 
 
             <!--pseudo-->
             <div class="col-md-4 mb-3">
               <label for="validationServer03">Pseudo</label>
-              <input type="text" class="form-control is-valid" id="validationServer03" placeholder="Entrez votre pseudo"  required>
-              <div class="valid-feedback invisible">
-                Looks good!
-              </div>
+              <input type="text" name="pseudo"class="form-control" id="validationServer03" placeholder="Entrez votre pseudo"  required>
+              
             </div>
           </div>
 
@@ -192,41 +177,31 @@ text-transform: none;}
           <div class="form-row" id=signup>
             <div class="col-md-4 mb-3">
               <label for="validationServer04">email</label>
-              <input type="text" class="form-control is-valid" id="validationServer04" placeholder="Entrez votre email" value="mark.otta@gmail.com" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <input type="text" class="form-control" name="email" id="validationServer04" placeholder="Entrez votre email" required>
+              
             </div>
             <div class="col-md-4 mb-3">
-              <label for="validationServer05">mot de passe</label>
-              <input type="text" class="form-control is-valid" id="validationServer05" placeholder="mot de passe" value="" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <label for="validationServer05">Mot de passe</label>
+              <input type="password" class="form-control" name="mdp1" id="validationServer05" placeholder="mot de passe" value="" required>
+              
             </div>
             <div class="col-md-4 mb-3">
-              <label for="validationServer06">mot de passe</label>
-              <input type="text" class="form-control is-valid" id="validationServer06" placeholder="Confirmation" value="" required>
-              <div class="valid-feedback">
-                Looks good!
-              </div>
+              <label for="validationServer06">Confirmation du mot de passe</label>
+              <input type="password" class="form-control" name="mdp2" id="validationServer06" placeholder="Confirmation" value="" required>
+              
             </div>
           </div>
           <!--telephone-->
           <div class="form-row" id=signup>
             <div class="col-md-4 ">
               <label for="validationServer07">Numéro de téléphone</label>
-              <input type="text" class="form-control is-invalid" id="validationServer07" placeholder="Entrez votre numéro" required>
-              <div class="invalid-feedback">
-                Passes ton 06wsh.
-              </div>
+              <input type="text" class="form-control" name="tel" id="validationServer07" placeholder="Entrez votre numéro" required>
+              
             </div>
             <div class="col-md-8">
               <label for="validationServer08">Adresse de livraison</label>
-              <input type="text" class="form-control is-invalid" id="validationServer08" placeholder="Entrez votre adresse de livraison" required>
-              <div class="invalid-feedback">
-                dis moi ou t'habites wsh.
-              </div>
+              <input type="text" name="adresse" class="form-control" id="validationServer08" placeholder="Entrez votre adresse de livraison" required>
+              
             </div>
           </div>
           <!--Adress et code postal-->
@@ -234,45 +209,41 @@ text-transform: none;}
           <div class="form-row"id=signup>
             <div class="col-md-4 mb-3">
               <label for="validationServer09">Pays</label>
-              <input type="text" class="form-control " id="validationServer09" placeholder="Pays" required>
+              <input type="text" name="pays" class="form-control " id="validationServer09" placeholder="Pays" required>
             </div>
             <div class="col-md-4 mb-3">
               <label for="validationServer10">Ville</label>
-              <input type="text" class="form-control " id="validationServer10" placeholder="Ville" required>
+              <input type="text" name="ville" class="form-control " id="validationServer10" placeholder="Ville" required>
             </div>
             <div class="col-md-4 mb-3">
               <label for="validationServer11">Code Postal</label>
-              <input type="text" class="form-control " id="validationServer11" placeholder="Zip" required>
+              <input type="text" name="cp" class="form-control " id="validationServer11" placeholder="Zip" required>
             </div>
           </div>
 
 
-        </form>
+       
         <!--PDP et/ou fond_ecran-->
         <!--Type user(acheteur ou vendeur uniquement-->
       
     <div class="container-fluid"  id="paiment">
     
     <h4 id=pay> Mode de paiment</h4>
-  </div>
+    </div>
        <!--Prenom et nom-->
-       <form>
+    
         <div class="form-row"id=signup>
           <div class="col-12">
             <label for="validationServer01">Numéro de carte</label>
-            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
-            <div class="valid-feedback invisible">
-              Looks good!
-            </div>
+            <input type="text" name="card" class="form-control" id="validationServer01" placeholder="456XXXXX-----XX" value="" required>
+            
           </div>
         </div>
         <div class="form-row"id=signup>
           <div class="col-md-8">
             <label for="validationServer02">Nom du titulaire</label>
-            <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Nom sur votre carde de crédit" required>
-            <div class="valid-feedback">
-              Looks good!
-            </div>
+            <input type="text" name="titu" class="form-control" id="validationServer02" placeholder="nom titulaire" required>
+            
           </div>
 
 
@@ -281,10 +252,8 @@ text-transform: none;}
           <!--pseudo-->
           <div class="col-md-4">
             <label for="validationServer07">CVV</label>
-            <input type="text" class="form-control is-valid" id="validationServer07" placeholder="pseudo" value="3 ou 4 chiffre derrière votre CB" required>
-            <div class="valid-feedback invisible">
-              Looks good!
-            </div>
+            <input type="text" name="cvv" class="form-control" id="validationServer07" placeholder="3  chiffre derrière votre CB"  required>
+            
           </div>
         </div>
 
@@ -293,30 +262,28 @@ text-transform: none;}
 
           <div class="col-md-6">
             <label for="validationServer01">Date d'expiration</label>
-            <input type="text" class="form-control is-valid" id="validationServer01" placeholder="MM/YY" value="" required>
-            <div class="valid-feedback invisible">
-              Looks good!
-            </div>
+            <input type="text" name="date" class="form-control" id="validationServer01" placeholder="MM/YY" value="" required>
+            
           </div>
 
 
           <div class="col-md-2">
             <label>
-              <input type="radio" name="test" value="small" checked>
+              <input type="radio"  name="cb" value="visa" checked>
               <img src="visa.jpg">
             </label>
           </div>
 
           <div class="col-md-2">
             <label>
-              <input type="radio" name="test" value="big">
+              <input type="radio"  name="cb" value="mastercard">
               <img src="mastercard.jpg">
             </label>
           </div>
 
           <div class="col-md-2">
             <label>
-              <input type="radio" name="test" value="big">
+              <input type="radio"  name="cb" value="amex">
               <img src="amex.jpg">
             </label>
           </div>
@@ -326,23 +293,22 @@ text-transform: none;}
           <div class="col-6">
           <div class="form-check">
               
-                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                <input class="form-check-input" type="checkbox" value="" id="invalidCheck3" required>
                 <label class="form-check-label" for="invalidCheck3">
                   Agree to terms and conditions
                 </label>
-                <div class="invalid-feedback">
-                  You must agree before submitting.
-                </div>
+                
               </div>
 
           </div>
-                        <div class="col-4">
-                <button type="button" class="btn btn-outline-info " style="padding-top: 10px;" data-toggle="modal" data-target="#exampleModalCenter">
+                <div class="col-4">
+                      <input class="btn btn-lg btn-primary " type= "submit" name= "valider" value= "valider">
+<!--                 <button type="submit" name="valider"class="btn btn-outline-info " style="padding-top: 10px;" data-toggle="modal" data-target="#exampleModalCenter">
                   inscription
-                </button>
+                </button> -->
               </div>
         </div>
-      </form>
+    </form>
       </div>
 
   </div>

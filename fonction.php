@@ -19,6 +19,4 @@ function connect_ddb($db)
 
 
 
-
-
 ?>

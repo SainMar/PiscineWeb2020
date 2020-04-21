@@ -2,10 +2,7 @@
   ///Pas encore utile mais besioin pour le panier et surement l'admin 
   session_start();
   
-  $_SESSION["type_user"]=2;
-  $_SESSION["id_user_actual"]=1;
-  $_SESSION["pseudo_user_actual"]="tutur";
-  $_SESSION["panier"]=array();
+
 
   include('fonction.php');
   include('tableau.php');
@@ -57,6 +54,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="mana_vente.js"></script>
+    <script src="mana_vente2.js"></script>
     <!-- Custom styles for this template -->
   <link href="startbootstrap-shop-homepage-gh-pages/css/shop-homepage.css" rel="stylesheet">
     <style>
@@ -64,6 +62,27 @@
         .param_selected{ background-color: #FA8B07; }
         #gallery{ margin-top: 30px;}
         #menu_g{ padding-left: 20px;}
+
+
+        .shadow-lg{background-color:#E0E0E0 ; padding-bottom :10px; padding-top: 10px;}
+        #pic{ border-right: 3px solid black ;}
+
+        html, body {
+                      height: 100%;
+                    }
+        body {
+                      display: flex;
+                      flex-direction: column;
+                    }
+        .content {
+                      flex: 1 0 auto;
+                    }
+        .footer {
+                      flex-shrink: 0;
+                    }
+        .btnmenu{ margin-top: 85px}
+
+    
     </style>
     <script>
 
@@ -78,37 +97,66 @@
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
-    <div class="container">
+   <!-- Navigation -->
+   <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
+    <div class="container-fluid">
       <a class="navbar-brand" href="template_vendeur.php">ECEbay</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="template_vendeur.php">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
           <li class="nav-item">
           <?php if($_SESSION["type_user"]==1)
+              {?>
+                <a class="nav-link" href="template_vendeur.php">Catalogue</a>
+        <?php }
+              ?>
+        <?php if(($_SESSION["type_user"]==2)||($_SESSION["type_user"]==3))
+              {?>
+                  <a class="nav-link" href="template_vendeur.php">Mes items</a>
+        <?php }
+              ?> 
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.php">About</a>
+          </li>
+          <li class="nav-item">
+        <?php if($_SESSION["type_user"]==1)
               {?>
             <a class="nav-link" href="template_panier.php">Panier</a>
         <?php }
               ?>
-        <?php if($_SESSION["type_user"]==2)
+        <?php if(($_SESSION["type_user"]==2)||($_SESSION["type_user"]==3))
               {?>
-            <a class="nav-link" href="manager_vente.php">Manager de Vente</a>
+            <a class="nav-link" href="manager_vente.php">Suivi Transactions</a>
         <?php }
               ?>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Paramètres</a>
+           
+            <div class="dropdown">
+            <a class="nav-link dropdown-toggle" type="link" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Paramètres</a>
+                
+
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                <a href="about.php" class="dropdown-item option" type="button" id="enchere">About</a>
+                <?php if($_SESSION["type_user"]==3)
+              {?>
+                <a href="template_admin.php" class="dropdown-item option" type="button" id="meilloffre">Admin</a>
+              <?php }?>
+              <?php if(($_SESSION["type_user"]==2)||($_SESSION["type_user"]==3))
+              {?>
+                <a href="manager_vente.php" class="dropdown-item option" type="button" id="meilloffre">Suivi Transactions</a>
+              <?php }?>
+              <?php if($_SESSION["type_user"]==1)
+              {?>
+                <a href="template_panier.php" class="dropdown-item option" type="button" id="meilloffre">Panier</a>
+              <?php }?>
+                <an href="deconnexion.php" class="dropdown-item option" type="button" id="achatimme">Déconnexion</a>
+            </div>
+        </div>
           </li>
         </ul>
       </div>
@@ -116,7 +164,7 @@
   </nav>
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container content">
 
  
     
@@ -124,14 +172,14 @@
 
       <div class="col-lg-3" id="menu_g">
 
-            <h1 class="my-4">Manager Vente de: <?php echo $_SESSION["pseudo_user_actual"]?></h1>
+            <h2 class="my-1">Manager Vente de: <?php echo $_SESSION["pseudo_user_actual"]?></h2>
         
             <h6>Choisis un type d'achat:</h6>
             
-            <button type="button" class="btn btn-secondary btn-lg elem_panier param_selected"  id="enchere">Enchère</button>
-            <button type="button" class="btn btn-secondary btn-lg elem_panier" id="meilloffre">Meilleure Offres</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg elem_panier param_selected btn-block btnmenu"  id="enchere">Enchère</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg elem_panier btn-block btnmenu" id="meilloffre">Meilleure Offres</button>
             
-            <button type="button" class="btn btn-secondary btn-lg elem_panier" id="historique">Historique de vente</button>
+            <button type="button" class="btn btn-outline-secondary btn-lg elem_panier btn-block btnmenu" id="historique">Historique de vente</button>
 
       </div>
       <!-- /.col-lg-3 -->
@@ -161,10 +209,11 @@
     </div>
     <!-- /.container -->
   </footer>
-
+              
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

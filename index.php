@@ -18,7 +18,7 @@
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark fond-orange fixed-top">
-    <div class="container">
+    <div class="container-fluid">
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">

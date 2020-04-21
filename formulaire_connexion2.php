@@ -121,70 +121,88 @@ $dbh=connect_ddb($database);
       
     </div>
   </nav>  
- 
+   <!-- container -->
+   <div class="container-fluid" style="margin-top: 200px; text-align:center;">
+    <?php  
+
+    if (isset ($_POST['valider'])){
+
+    $pseudo=$_POST['pseudo'];
+    $email=$_POST['email'];
+    $mdp=$_POST['mdp'];
+
+    $il_est_la=false;
+    if(isset($pseudo)&&isset($email)&&isset($mdp))
+    {
+      /* Ouvre bdd
+      select toutes les lignes*/
+      $sql="SELECT * FROM `users`";
+      $result=$dbh->prepare($sql);
+      $result->execute(); 
+      
 
 
 
-    <div class="container shadow-lg " >
+    while ($total=$result->fetchAll())
+            {
+                 //tu parcoure le tableau resultant
+                foreach($total as $data)
+                {
+                      if(($data["pseudo"]==$pseudo)&&($data["mdp"]==$mdp)||($data["email"]==$email)&&($data["mdp"]==$mdp))
+                      {
 
-        <div class="container-fluid"  id="connexion">
-    
-    <h1> Connexion</h1>
-  </div>
+                        echo '<h1>Vous êtes connecté à ECEbay, bonne navigation !</h1>';
+                        /// redirection à la page de catalogue 
+                        /// re faire requete recupérer avec pseudo la ligne du users dzns users 
+                        $sql2="SELECT * FROM `users` WHERE pseudo="."'".$pseudo."'";
+                        $result2=$dbh->prepare($sql2);
+                        $result2->execute();
+                        while ($total2=$result2->fetchAll())
+                        {
+                                
+                                foreach($total2 as $data2)
+                                {
+                                    $id_user=$data2['id_user'];
+                                    $type_user=$data2['type_user'];
+                                    
+                                }
+                        }
+                        $_SESSION['id_user_actual']= $id_user;
+                        $_SESSION['pseudo_user_actual']=$pseudo;
+                        $_SESSION['type_user']= $type_user;
+                        $_SESSION["panier"]=array();
+                        ?><meta http-equiv="refresh" content="2;url=template_vendeur.php"> <?php
+                        //fonction fredireigte vers catalgue 
+                                  $il_est_la=true;
 
-        <div id="cadre">
-              <!--Prenom et nom-->
-              <form method="POST" name="connexion" action="formulaire_connexion2.php">
-                    <div class="form-row" id="form">
-
-                        <div class="col-12">
-                            <label for="validationServer01">Pseudo</label>
-                            <input type="text" class="form-control" id="validationServer01" name="pseudo" placeholder="Entrez votre pseudo"  required>
-                            
-                        </div>
-
-                        <div class="col-12">
-                            <label for="validationServer02">Email</label>
-                            <input type="text" name="email" class="form-control" id="validationServer02" placeholder="Entrez votre adresse email"  required>
-                            
-                        </div>
-
-                        
-                    <!--pseudo-->
-                        <div class="col-12">
-                            <label for="validationServer07">Mot de passe</label>
-                            <input type="password" name="mdp" class="form-control" id="validationServer07" placeholder="entrez votre mot de passe"  required>
-                            
-                        </div>
-                    </div>
-                
-              <div class="form-row" style="padding-bottom: 25px; padding-bottom: 25px;">
-                
-                <div class="col-6" style="margin-left: 10px;">
-                  <button type="submit" class="btn btn-info" name="valider"data-toggle="modal" data-target="#exampleModalCenter">
-                    Connexion
-                  </button>
-                  <div class="col-7" style="padding-left: unset;">
-                      <br>pas encore inscrit ? cliquez <a href="formulaire_inscription.php">ici</a><br>
-
-                  </div>
+                       }
                   
-                </div>
-              </div>
-
+                }
                 
-              </form>
-                <!--PDP et/ou fond_ecran-->
-                <!--Type user(acheteur ou vendeur uniquement-->
-          </div>
+            }
+/*        if(email_user= mail && password_user= password)
+        {
+            $il_est_la=true;
+        }*/
+        
+      // fin tableau des users
+        if($il_est_la==false)
+        {
+          echo '<h1> combinaison email/mdp ou pseudo/mdp incorrect</h1>'; /// <p> c pas bon 
+          ?><meta http-equiv="refresh" content="2;url=formulaire_connexion.php"> <?php
 
- 
-      </div>
-  </div>
+        }
+      
+    }
 
-  
-  
+    else{
+      echo "<p> Veuillez remplir tout les champs";
+    }
+    
+    }
 
-
+    
+    ?>
+   </div>
 </body>
 </html>
